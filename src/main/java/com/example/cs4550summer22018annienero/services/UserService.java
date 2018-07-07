@@ -25,11 +25,25 @@ public class UserService {
 
     @GetMapping("/api/user/id")
     public User findUserById() {
-        return new User();
+        // TODO how do i parse the path
+        // how do i jsonify the user... what even should be the signature of this method
+        return userRepository.findById(0).get();
+    }
+
+    @PutMapping("/api/user/id")
+    public void updateUser(@RequestBody User user) {
+        //userRepository.what(id, user);
+        // oh wait can i mutate things if so then
+        // User myUser = userRepository.findById(0).get();
+        // myUser.allthefields = user.fields
+        // prob make a method in user to do this?????????
+
     }
 
     @DeleteMapping("/api/user/id")
     public void deleteUser() {
-        userRepository.delete(null);
+        //TODO parse
+        User myUser = userRepository.findById(0).get();
+        userRepository.delete(myUser);
     }
 }

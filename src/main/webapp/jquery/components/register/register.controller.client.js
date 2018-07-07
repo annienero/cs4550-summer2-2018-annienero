@@ -4,6 +4,10 @@
     var $passwordFld = $('#password');
     var $password2Fld = $('#password2');
 
+    // TODO: why do i need following two lines??? (main isnt even defined rn but what would go in it?)
+    var userService = new UserService();
+    $(main);
+
     var $registerBtn = jQuery('#registerBtn');
     $registerBtn.click(registerHandler);
     

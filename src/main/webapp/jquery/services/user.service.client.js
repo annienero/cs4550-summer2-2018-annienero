@@ -4,6 +4,8 @@ function UserServiceClient() {
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
+    this.register = register;
+
     this.url = 'http://localhost:8080/api/user';  // TODO: r u sure
     var self = this;
 
@@ -54,4 +56,8 @@ function UserServiceClient() {
 
         // it tell me to receive status but how and what and HELP ME
      }
+
+     function register() { 
+        // do i not just use create user here and also i need so much fields but i have none?
+      }
 }

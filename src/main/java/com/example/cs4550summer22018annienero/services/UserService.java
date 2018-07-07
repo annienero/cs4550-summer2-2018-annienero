@@ -7,6 +7,8 @@ import com.example.cs4550summer22018annienero.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 public class UserService {
 
@@ -45,5 +47,23 @@ public class UserService {
         //TODO parse
         User myUser = userRepository.findById(0).get();
         userRepository.delete(myUser);
+    }
+
+    @GetMapping("/api/user") //TODO is that right path?
+    public User findUserByUsername(@RequestBody String username) { //TODO what should be the signature of this method?
+        //"parses the username from a query parameter called username" (???????)
+        return userRepository.findUserByUsername();
+
+        //TODO Note that you might need to refactor the findAllUsers() method.
+        //HUH
+    }
+
+    @PostMapping("/api/register")
+    public User register(@RequestBody User user, HttpSession session) {
+        if (userRepository.findUserByUsername() == null) {
+            userRepository.save(user);
+        }
+        // TODO add the new user to the session attribute "user" to set the new user as currently logged in
+        return user; //TODO what if it is null why does this even return anything
     }
 }

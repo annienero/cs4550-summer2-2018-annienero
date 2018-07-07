@@ -10,12 +10,13 @@
 <link href="user-admin.style.client.css" rel="stylesheet" />
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../services/user.service.client.js"></script>
-<script src="user-admin.controller.client.js"></script>
+<script src="admin-user.service.client.js"></script>
+<script src="admin-user.controller.client.js"></script>
 </head>
+
 <body>
 
-    <h1> User Admin</h1>
+    <h1>User Admin</h1>
 
     <table class="table">
         <thead>
@@ -27,6 +28,7 @@
             <th>Role</th>
             <th>&nbsp;</th>
           </tr>
+        </thead>
           <tr class="wbdv-form">
             <td><input id="usernameFld" class="form-control"
               placeholder="Username" /></td>
@@ -41,30 +43,38 @@
                 <option value="STUDENT">Student</option>
                 <option value="ADMIN">Admin</option>
             </select></td>
-            <td><span class="float-right" style="white-space: nowrap">
+            <td class="wbdv-actions">
                 <i class="fa-2x fa fa-search wbdv-search"></i> <i
                 class="fa-2x fa fa-plus wbdv-create"></i> <i
                 class="fa-2x fa fa-check wbdv-update"></i>
-            </span></td>
+            </td>
           </tr>
-    </table>
-    <tbody class="wbdv-tbody">
-        <tr class="wbdv-template wbdv-user wbdv-hidden">
-          <td class="wbdv-username">ada</td>
-          <td>&nbsp;</td>
-          <td class="wbdv-first-name">Ada</td>
-          <td class="wbdv-last-name">Lovelace</td>
-          <td class="wbdv-role">FACULTY</td>
-          <td class="wbdv-actions">
-            <span class="float-right">
-              <i id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></i>
-              <i id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></i>
-            </span>
-          </td>
-       </tr>
-     </tbody>
-    </table>
-    
-    
+          <tbody class="wbdv-tbody">
+                <tr class="wbdv-template wbdv-user wbdv-hidden">
+                  <td class="wbdv-username">ada</td>
+                  <td>&nbsp;</td>
+                  <td class="wbdv-first-name">Ada</td>
+                  <td class="wbdv-last-name">Lovelace</td>
+                  <td class="wbdv-role">FACULTY</td>
+                  <td class="wbdv-actions">
+                      <i id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></i>
+                      <i id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></i>
+                  </td>
+               </tr>
+             </tbody>
+             <tbody class="wbdv-tbody">
+                    <tr class="wbdv-template wbdv-user wbdv-hidden">
+                      <td class="wbdv-username">ada</td>
+                      <td>&nbsp;</td>
+                      <td class="wbdv-first-name">Ada</td>
+                      <td class="wbdv-last-name">Lovelace</td>
+                      <td class="wbdv-role">FACULTY</td>
+                      <td class="wbdv-actions">
+                          <i id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></i>
+                          <i id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></i>
+                      </td>
+                   </tr>
+                 </tbody>
+            </table>
 </body>
 

@@ -1,0 +1,21 @@
+h1 {
+    margin-left: 16px;
+}
+
+.table {
+    margin-left: 16px;
+    padding-right: 16px;
+    
+}
+
+.wbdv-actions {
+    white-space: nowrap;
+    float: right;
+    margin-right: 16px; 
+    margin-top: -2px;
+}
+
+
+.wbdv-form {
+    margin-right: 12px;
+}

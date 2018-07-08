@@ -10,11 +10,11 @@ function UserServiceClient() {
     this.url = 'http://localhost:8080/api/user';  // TODO: r u sure
     var self = this;
 
-    function createUser(user, callback) { 
+    function createUser(userObjStr, callback) { 
         // TODO: what is callback and why
         fetch('/api/user', {
             method: 'post',
-            body: JSON.stringify(userObj), 
+            body: userObjStr, 
             // TODO point of below and do i even need
             headers: {
                 'Content-Type': 'application/json'
@@ -22,6 +22,7 @@ function UserServiceClient() {
         })
      }
     function findAllUsers(callback) { 
+        // TODO why callback why why why
         // TODO: do i need to do anything else to make this make sense/work or like
         // wait how does get even work pls help me
         fetch('/api/user', {
@@ -37,11 +38,11 @@ function UserServiceClient() {
             method: 'get'
         })
 
-        // TODO: return a user
+        // TODO: return a user (is that what fetch gives?)
      }
 
     function updateUser(userId, user, callback) { 
-        // TODO: did i send id as path parameter tho did i do anything
+    //TODO does that even make sense to build path or
         var path = '/api/user' + userId;
         fetch(path, {
             method: 'post',

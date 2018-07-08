@@ -34,7 +34,7 @@ public class UserService {
 
     @PutMapping("/api/user/id")
     public void updateUser(@RequestBody User user) {
-        //userRepository.what(id, user);
+        //TODO userRepository.what(id, user);
         // oh wait can i mutate things if so then
         // User myUser = userRepository.findById(0).get();
         // myUser.allthefields = user.fields

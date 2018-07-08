@@ -23,13 +23,6 @@
         
         var userObjStr = JSON.stringify(userObj)
         
-        // TODO: is this a post or wtf... all i wanna do is start it
-        fetch('/api/login', {
-            method: 'post',
-            body: userObjStr,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+        userService.login(userObjStr, null) // TODO   callback
      }
 })();

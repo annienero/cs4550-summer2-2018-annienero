@@ -5,6 +5,7 @@ function UserServiceClient() {
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
     this.register = register;
+    this.login = login;
 
     this.url = 'http://localhost:8080/api/user';  // TODO: r u sure
     var self = this;
@@ -26,21 +27,21 @@ function UserServiceClient() {
         fetch('/api/user', {
             method: 'get'
         })
-        // do i return something that would prob make sense but how
+        // TODO: do i return something that would prob make sense but how
      }
 
     function findUserById(userId, callback) { 
-        // does path even make sense
+        // TODO: does path even make sense
         var path = '/api/user' + userId;
         fetch(path, {
             method: 'get'
         })
 
-        // return a user
+        // TODO: return a user
      }
 
     function updateUser(userId, user, callback) { 
-        // did i send id as path parameter tho did i do anything
+        // TODO: did i send id as path parameter tho did i do anything
         var path = '/api/user' + userId;
         fetch(path, {
             method: 'post',
@@ -54,10 +55,28 @@ function UserServiceClient() {
             method: 'delete'
         })
 
-        // it tell me to receive status but how and what and HELP ME
+        // TODO: it tell me to receive status but how and what and HELP ME
      }
 
-     function register() { 
-        // do i not just use create user here and also i need so much fields but i have none?
+     function register(userObjStr, callback) { 
+        fetch('/api/register', {
+            method: 'post',
+            body: userObjStr,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
       }
+
+      function login(userObjStr, callback) {
+        fetch('/api/register', {
+            method: 'get',
+            body: userObjStr,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // TODO: shoul i retrn or smth
+       }
 }

@@ -30,13 +30,7 @@
         
         var userObjStr = JSON.stringify(userObj)
         
-        fetch('/api/register', {
-            method: 'post',
-            body: userObjStr,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+        userService.register(userObjStr, null) // TODO: how to get callback
     }
 })();
 

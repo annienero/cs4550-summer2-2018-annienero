@@ -58,7 +58,7 @@ function UserServiceClient() {
         // TODO: it tell me to receive status but how and what and HELP ME
      }
 
-     function register(userObjStr, callback) { 
+    function register(userObjStr, callback) { 
         fetch('/api/register', {
             method: 'post',
             body: userObjStr,
@@ -68,9 +68,9 @@ function UserServiceClient() {
         });
       }
 
-      function login(userObjStr, callback) {
+    function login(userObjStr, callback) {
         // TODO: all i wanna do is start session w user
-        fetch('/api/register', {
+        fetch('/api/login', {
             method: 'get',
             body: userObjStr,
             headers: {
@@ -79,5 +79,22 @@ function UserServiceClient() {
         });
 
         // TODO: shoul i retrn or smth
-       }
+    }
+
+    function logout(callback) {
+        //TODO what kinda fetch?????/
+        fetch('/api/profile', {
+            method: 'post'
+        })
+    }
+
+    //TODO switch to all stringified args
+    function updateProfile(userId, user, callback) { 
+        // TODO: did i send id as path parameter tho did i do anything
+        var path = '/api/user';
+        fetch(path, {
+            method: 'post',
+            body: JSON.stringify(user)
+        })
+     }
 }

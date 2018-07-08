@@ -7,6 +7,8 @@
     $(main);
 
     function main() {
+
+        //TODO is there a wy to prepop info? do i need to?
         $usernameFld = $('#username');  
         $phoneFld = $('#phone');
         $emailFld = $('#email');
@@ -37,6 +39,8 @@
         var userObjStr = JSON.stringify(userObj);
         
         userService.updateProfile(userObjStr, null) // TODO: how to get callback
+
+        //TODO show success when success update
     }
 
     function logoutHandler() {

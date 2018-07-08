@@ -31,6 +31,9 @@
         var userObjStr = JSON.stringify(userObj)
         
         userService.register(userObjStr, null) // TODO: how to get callback
+
+
+        // TODO what to do when username taken? just alert?
     }
 })();
 

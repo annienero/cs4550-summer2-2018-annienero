@@ -4,6 +4,8 @@
     var userService = new AdminUserServiceClient();
     $(main);
 
+
+    // TODO also how do i link the pages together for the "Sign up" button.. and then do for register page too
     function main() { 
         $usernameFld = $('#username');
         $passwordFld = $('#password');
@@ -24,5 +26,10 @@
         var userObjStr = JSON.stringify(userObj)
         
         userService.login(userObjStr, null) // TODO   callback
+
+
+        //TODO if this fails, just alert?
+
+        //TODO if it doesn't, should i take them to ???
      }
 })();

@@ -1,15 +1,20 @@
 (function () {
     //equivalant to var $usernameFld = jQuery('username')
-    var $usernameFld = $('#username');  // # to get id
-    var $passwordFld = $('#password');
-    var $password2Fld = $('#password2');
+    var $usernameFld, $passwordFld, $password2Fld;
+    var $registerBtn;
 
-    // TODO: why do i need following two lines??? (main isnt even defined rn but what would go in it?)
+    // TODO: why do i need user service?
     var userService = new UserService();
     $(main);
 
-    var $registerBtn = jQuery('#registerBtn');
-    $registerBtn.click(registerHandler);
+    function main() {
+        //equivalant to var $usernameFld = jQuery('username')
+        $usernameFld = $('#username');  // # to get id
+        $passwordFld = $('#password');
+        $password2Fld = $('#password2');
+        $registerBtn = jQuery('#registerBtn');
+        $registerBtn.click(registerHandler);
+    }
     
     function registerHandler() {
         var usernameStr = $usernameFld.val();

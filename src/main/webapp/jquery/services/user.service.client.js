@@ -41,12 +41,12 @@ function UserServiceClient() {
         // TODO: return a user (is that what fetch gives?)
      }
 
-    function updateUser(userId, user, callback) { 
+    function updateUser(userId, userObjStr, callback) {
     //TODO does that even make sense to build path or
         var path = '/api/user' + userId;
         fetch(path, {
             method: 'post',
-            body: JSON.stringify(user)
+            body: userObjStr
         })
      }
 
@@ -88,14 +88,13 @@ function UserServiceClient() {
         })
     }
 
-    //TODO switch to all stringified args
-    function updateProfile(userId, user, callback) { 
+    function updateProfile(userId, userObjStr, callback) {
         // TODO wait java doesnt seem to use id plz help
         // TODO: did i send id as path parameter tho did i do anything
         var path = '/api/user';
         fetch(path, {
             method: 'post',
-            body: JSON.stringify(user)
+            body: userObjStr
         })
      }
 }

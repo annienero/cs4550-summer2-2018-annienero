@@ -52,7 +52,6 @@
 
     function deleteUser() {
         // TODO how get id
-        //  TODO or do i pass the id or something plz help
         userService.deleteUser(id, null); //TODO need callback
 
          // TODO update the form on server response vvv ???

@@ -69,6 +69,7 @@ function UserServiceClient() {
       }
 
       function login(userObjStr, callback) {
+        // TODO: all i wanna do is start session w user
         fetch('/api/register', {
             method: 'get',
             body: userObjStr,

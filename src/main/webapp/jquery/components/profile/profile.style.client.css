@@ -1,0 +1,9 @@
+#updateBtn {
+    background-color: rgb(57, 180, 57);
+    border-color: rgb(57, 180, 57);
+}
+
+#logoutBtn {
+    background-color: red;
+    border-color: red;
+}

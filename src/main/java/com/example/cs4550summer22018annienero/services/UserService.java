@@ -60,10 +60,22 @@ public class UserService {
 
     @PostMapping("/api/register")
     public User register(@RequestBody User user, HttpSession session) {
-        if (userRepository.findUserByUsername() == null) {
+        User myUser = userRepository.findUserByUsername();
+        if (myUser == null) {
             userRepository.save(user);
+            // TODO add the new user to the session attribute "user" to set the new user as currently logged in
+            return user;
         }
-        // TODO add the new user to the session attribute "user" to set the new user as currently logged in
-        return user; //TODO what if it is null why does this even return anything
+        return null;
     }
+
+    @PostMapping("/api/login")
+    public User login(@RequestBody User user, HttpSession session) {
+        User myUser = userRepository.findUserByUsernameAndPassword();
+        if (myUser == null) {
+            // TODO  add the user to the HTTP session... Save the found user in a session variable called "user"
+        }
+        return myUser;
+    }
+
 }

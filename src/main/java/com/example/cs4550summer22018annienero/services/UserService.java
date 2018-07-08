@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class UserService {
 
+    public static final String USER = "user";
+
     @Autowired
     UserRepository userRepository;
 
@@ -64,6 +66,7 @@ public class UserService {
         if (myUser == null) {
             userRepository.save(user);
             // TODO add the new user to the session attribute "user" to set the new user as currently logged in
+            session.setAttribute(USER, user);
             return user;
         }
         return null;
@@ -73,25 +76,28 @@ public class UserService {
     public User login(@RequestBody User user, HttpSession session) {
         User myUser = userRepository.findUserByUsernameAndPassword();
         if (myUser == null) {
-            // TODO  add the user to the HTTP session... Save the found user in a session variable called "user"
+            return null;
         }
+        // TODO  add the user to the HTTP session... Save the found user in a session variable called "user"
+        session.setAttribute(USER, myUser);
         return myUser;
     }
 
     @PutMapping("/api/profile")
     public User updateProfile(@RequestBody User user, HttpSession session) {
-        //TODO get current user from session
-        //if exist
-        //TODO get their id then update that user based on given one
-        // return updated user
-        //else
+        User currentUser = (User) session.getAttribute(USER); //TODO is this safe?
+        if (currentUser != null) {
+            //TODO get their id then update that user based on given one
+            // TODO return updated user
+        }
         return null;
     }
 
     @PostMapping("/api/logout")
     public User logout(HttpSession session) {
-        //TODO do
-        return null;
+        User currentUser = (User) session.getAttribute(USER); //TODO safe?
+        session.removeAttribute(USER);
+        return currentUser;
     }
 
 }

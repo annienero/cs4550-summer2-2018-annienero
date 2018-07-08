@@ -38,19 +38,14 @@
         
         var userObjStr = JSON.stringify(userObj);
         
-        userService.updateProfile(userObjStr, null) // TODO: how to get callback
+        userService.updateProfile(userid, userObjStr, null) // TODO: how to get callback AND id :/
 
         //TODO show success when success update
     }
 
     function logoutHandler() {
-        var usernameStr = $usernameFld.val(); //TODO is this necessary or do i just logout whoever is in
-        var userObj = {
-            username: usernameStr
-        }
-
-        var userObjStr = JSON.stringify(userObj);
-        userService.updateUser(userObjStr, null) // TODO: how to get callback
+        //TODO just to be sure, idc who i log out bc there's only one so that's who i do???
+        userService.updateUser(null) // TODO: how to get callback
     }
 })();
 

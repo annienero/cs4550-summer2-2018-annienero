@@ -91,6 +91,7 @@ function UserServiceClient() {
 
     //TODO switch to all stringified args
     function updateProfile(userId, user, callback) { 
+        // TODO wait java doesnt seem to use id plz help
         // TODO: did i send id as path parameter tho did i do anything
         var path = '/api/user';
         fetch(path, {

@@ -78,4 +78,20 @@ public class UserService {
         return myUser;
     }
 
+    @PutMapping("/api/profile")
+    public User updateProfile(@RequestBody User user, HttpSession session) {
+        //TODO get current user from session
+        //if exist
+        //TODO get their id then update that user based on given one
+        // return updated user
+        //else
+        return null;
+    }
+
+    @PostMapping("/api/logout")
+    public User logout(HttpSession session) {
+        //TODO do
+        return null;
+    }
+
 }

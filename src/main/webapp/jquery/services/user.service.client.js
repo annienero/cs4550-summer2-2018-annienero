@@ -70,7 +70,6 @@ function UserServiceClient() {
       }
 
     function login(userObjStr, callback) {
-        // TODO: all i wanna do is start session w user
         fetch('/api/login', {
             method: 'get',
             body: userObjStr,
@@ -79,7 +78,7 @@ function UserServiceClient() {
             }
         });
 
-        // TODO: shoul i retrn or smth
+        // TODO: shoul i retrn or smth, how to say if it worked or not?
     }
 
     function logout(callback) {

@@ -21,6 +21,8 @@
         $editBtn.click(updateUser);
         $createBtn.click(createUser);
         $userRowTemplate.click(selectUser);
+
+        findAllUsers()
      }
 
     function createUser() { 

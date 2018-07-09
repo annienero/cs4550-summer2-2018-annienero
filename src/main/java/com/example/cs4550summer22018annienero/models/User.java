@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class User {
@@ -89,5 +89,29 @@ public class User {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void updateUser(User user) {
+        if (user.firstName != null) {
+            this.firstName = user.firstName;
+        }
+        if (user.lastName != null) {
+            this.lastName = user.lastName;
+        }
+        if (user.phone != null) {
+            this.phone = user.phone;
+        }
+        if (user.phone != null) {
+            this.phone = user.phone;
+        }
+        if (user.email != null) {
+            this.email = user.email;
+        }
+        if (user.role != null) {
+            this.role = user.role;
+        }
+        if (user.dateOfBirth != null) {
+            this.dateOfBirth = user.dateOfBirth;
+        }
     }
 }

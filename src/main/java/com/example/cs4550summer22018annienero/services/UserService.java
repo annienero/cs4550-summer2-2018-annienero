@@ -36,12 +36,9 @@ public class UserService {
     @PutMapping("/api/user/{id}")
     public void updateUser(@PathVariable("id") String id, @RequestBody User user) {
         int userId = Integer.parseInt(id);
-        //TODO userRepository.what(userId, user);
-        // oh wait can i mutate things if so then
-        // User myUser = userRepository.findById(userId).get();
-        // myUser.allthefields = user.fields
-        // prob make a method in user to do this?????????
-
+        User newUser = userRepository.findById(userId).get();
+        newUser.updateUser(user);
+        userRepository.save(newUser);
     }
 
     @DeleteMapping("/api/user/{id}")
@@ -84,10 +81,10 @@ public class UserService {
     public User updateProfile(@RequestBody User user, HttpSession session) {
         User currentUser = (User) session.getAttribute(USER);
         if (currentUser != null) {
-            //TODO update currentUser.updateUser(user);
+            currentUser.updateUser(user);
             userRepository.save(currentUser);
             session.setAttribute(USER, currentUser);
-            // TODO return updated user
+            return currentUser;
         }
         return null;
     }

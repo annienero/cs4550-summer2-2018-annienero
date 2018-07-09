@@ -27,12 +27,13 @@ function UserService() {
         // wait how does get even work pls help me
         fetch('/api/user', {
             method: 'get'
+        }).then(function(response) {
+            console.log(response.json())
         })
         // TODO: do i return something that would prob make sense but how
      }
 
     function findUserById(userId, callback) { 
-        // TODO: does path even make sense
         var path = '/api/user' + userId;
         fetch(path, {
             method: 'get'
@@ -42,7 +43,6 @@ function UserService() {
      }
 
     function updateUser(userId, userObjStr, callback) {
-    //TODO does that even make sense to build path or
         var path = '/api/user' + userId;
         fetch(path, {
             method: 'post',
@@ -83,7 +83,6 @@ function UserService() {
     }
 
     function logout(callback) {
-        //TODO what kinda fetch?????/
         fetch('/api/profile', {
             method: 'post'
         })

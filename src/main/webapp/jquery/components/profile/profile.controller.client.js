@@ -1,29 +1,28 @@
 (function () {
     //equivalant to var $usernameFld = jQuery('username')
-    var $usernameFld, $phoneFld, $emailFld, $roleFld, $dobFld;
+    var $usernameFld, $firstNameFld, $lastNameFld, $phoneFld, $emailFld, $roleFld, $dobFld;
     var $updateBtn, $logoutBtn;
 
     var userService = new UserService();
     $(main);
 
     function main() {
-        $usernameFld = $('#username');  
+        $usernameFld = $('#username'); 
+        $firstNameFld = $('#firstName'); 
+        $lastNameFld = $('#lastName');  
         $phoneFld = $('#phone');
         $emailFld = $('#email');
         $roleFld = $('#role');
         $dobFld = $('#dob');
-        $updateBtn = jQuery('#updateBtn');
+        $updateBtn = $('#updateBtn');
         $updateBtn.click(updateHandler);
-        $logoutBtn = jQuery('#logoutBtn');
+        $logoutBtn = $('#logoutBtn');
         $logoutBtn.click(logoutHandler);
 
-         //TODO idk what id is..it would make more sense to just get curuser from session....
-        //TODO also userservice prob not returning anything
-        // response.json() parses the data once the server responds with data and this can be used as any other object on client-side
         var userObj;
         
-        //TODO getCurrentUser doesnt exist yet.... also need to properly prepop
-        userService.getCurrentUser(userId).then(function(response) {
+        userService.getCurrentUser().then(function(response) {
+            // response.json() parses the data once the server responds with data and this can be used as any other object on client-side
             userObj = response.json();
         });
 
@@ -31,15 +30,17 @@
     }
 
     function renderUser(userObj) {
-        $usernameFld.val(userObj.getUsername);
+        $usernameFld.val(userObj.getUsername)
+        $firstNameFld.val(userObj.getFirstName);
+        $lastNameFld.val(userObj.getLastName);
         $phoneFld.val(userObj.getPhone);
         $emailFld.val(userObj.getEmail);
         $roleFld.val(userObj.getRole);
-        
-        //TODO user fields aren't all the same everywhere and it's gross (prob just use all)
     }
     
     function updateHandler() {
+        var firstNameStr = $firstNameFld.val();
+        var lastNameStr = $lastNameFld.val();
         var phoneStr = $phoneFld.val();
         var emailStr = $emailFld.val();
         var roleStr = $roleFld.val();
@@ -47,8 +48,8 @@
     
         // make JSON of user info (don't change username)
         var userObj = {
-            first_name: "need", //TODO
-            last_name: "need",
+            first_name: firstNameStr,
+            last_name: lastNameStr,
             phone: phoneStr,
             email: emailStr,
             role: roleStr,

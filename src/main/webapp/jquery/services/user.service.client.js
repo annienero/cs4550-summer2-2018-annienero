@@ -6,6 +6,9 @@ function UserService() {
     this.updateUser = updateUser;
     this.register = register;
     this.login = login;
+    this.logout = logout;
+    this.updateProfile = updateProfile;
+    this.getCurrentUser = getCurrentUser;
 
     this.url = 'http://localhost:8080/api/user';  // TODO: r u sure
     var self = this;
@@ -22,8 +25,6 @@ function UserService() {
      }
     function findAllUsers(callback) { 
         // TODO why callback why why why
-        // TODO: do i need to do anything else to make this make sense/work or like
-        // wait how does get even work pls help me
         var users;
         fetch('/api/user', {
             method: 'get'
@@ -31,7 +32,6 @@ function UserService() {
             users = response.json();
         })
         return users;
-        // TODO: do i return something that would prob make sense but how
      }
 
     function findUserById(userId, callback) { 
@@ -88,7 +88,7 @@ function UserService() {
     }
 
     function logout(callback) {
-        fetch('/api/profile', {
+        fetch('/api/logout', {
             method: 'post',
             'credentials': 'include'
             //TODO do i only need credentials when actual user (not just their info) changes or always?
@@ -96,7 +96,7 @@ function UserService() {
     }
 
     function updateProfile(userObjStr, callback) {
-        fetch('/api/user', {
+        fetch('/api/profile', {
             method: 'put',
             body: userObjStr,
             headers: {
@@ -104,4 +104,18 @@ function UserService() {
             }
         })
      }
+
+     //TODO callback bc idk?
+     function getCurrentUser(callback) {
+         //TODO is this kinda the right idea w returning stuff?
+        var user;
+        fetch('/api/profile', {
+            method: 'get'
+        }).then(function(response) {
+            user = response.json();
+        })
+        //TODO seems like this is just getting back a null
+        console.log(user);
+        return user;
+    }
 }

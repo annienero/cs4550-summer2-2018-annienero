@@ -19,23 +19,18 @@
         $logoutBtn = $('#logoutBtn');
         $logoutBtn.click(logoutHandler);
 
-        var userObj;
-        
-        userService.getCurrentUser().then(function(response) {
-            // response.json() parses the data once the server responds with data and this can be used as any other object on client-side
-            userObj = response.json();
-        });
-
-        renderUser(userObj);
+        var user;
+        user = userService.getCurrentUser(null);
+        renderUser(user);
     }
 
-    function renderUser(userObj) {
-        $usernameFld.val(userObj.getUsername)
-        $firstNameFld.val(userObj.getFirstName);
-        $lastNameFld.val(userObj.getLastName);
-        $phoneFld.val(userObj.getPhone);
-        $emailFld.val(userObj.getEmail);
-        $roleFld.val(userObj.getRole);
+    function renderUser(user) {
+        $usernameFld.val(user.getUsername);
+        $firstNameFld.val(user.getFirstName);
+        $lastNameFld.val(user.getLastName);
+        $phoneFld.val(user.getPhone);
+        $emailFld.val(user.getEmail);
+        $roleFld.val(user.getRole);
     }
     
     function updateHandler() {
@@ -58,7 +53,7 @@
         
         var userObjStr = JSON.stringify(userObj);
         
-        userService.updateProfile(userid, userObjStr, null) // TODO: how to get callback AND id :/
+        userService.updateProfile(userObjStr, null) // TODO: how to get callback
 
         //TODO show success when success update
     }

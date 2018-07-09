@@ -51,10 +51,9 @@ public class UserService {
         userRepository.delete(myUser);
     }
 
-    @GetMapping("/api/user") //TODO is that right path?
-    public User findUserByUsername(@RequestBody User user) { //TODO what should be the signature of this method?
-        //"parses the username from a query parameter called username" (???????)
-        return userRepository.findUserByUsername(user.getUsername());
+    @GetMapping("/api/user/{username}")
+    public User findUserByUsername(@PathVariable("username") String username) {
+        return userRepository.findUserByUsername(username);
 
         //TODO Note that you might need to refactor the findAllUsers() method.
         //HUH

@@ -12,6 +12,7 @@
      }
 
     function login() { 
+        alert("hi");
         var usernameStr = $usernameFld.val();
         var passwordStr = $passwordFld.val();
     

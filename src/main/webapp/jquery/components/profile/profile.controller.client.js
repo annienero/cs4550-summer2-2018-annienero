@@ -7,8 +7,6 @@
     $(main);
 
     function main() {
-
-        //TODO is there a wy to prepop info? do i need to?
         $usernameFld = $('#username');  
         $phoneFld = $('#phone');
         $emailFld = $('#email');
@@ -18,18 +16,39 @@
         $updateBtn.click(updateHandler);
         $logoutBtn = jQuery('#logoutBtn');
         $logoutBtn.click(logoutHandler);
+
+         //TODO idk what id is..it would make more sense to just get curuser from session....
+        //TODO also userservice prob not returning anything
+        // response.json() parses the data once the server responds with data and this can be used as any other object on client-side
+        var userObj;
+        
+        //TODO getCurrentUser doesnt exist yet.... also need to properly prepop
+        userService.getCurrentUser(userId).then(function(response) {
+            userObj = response.json();
+        });
+
+        renderUser(userObj);
+    }
+
+    function renderUser(userObj) {
+        $usernameFld.val(userObj.getUsername);
+        $phoneFld.val(userObj.getPhone);
+        $emailFld.val(userObj.getEmail);
+        $roleFld.val(userObj.getRole);
+        
+        //TODO user fields aren't all the same everywhere and it's gross (prob just use all)
     }
     
     function updateHandler() {
-        var usernameStr = $usernameFld.val();
         var phoneStr = $phoneFld.val();
         var emailStr = $emailFld.val();
         var roleStr = $roleFld.val();
         var dobStr = $dobFld.val();
     
-        // make JSON of user info
+        // make JSON of user info (don't change username)
         var userObj = {
-            username: usernameStr,
+            first_name: "need", //TODO
+            last_name: "need",
             phone: phoneStr,
             email: emailStr,
             role: roleStr,

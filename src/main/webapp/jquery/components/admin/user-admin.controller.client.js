@@ -3,7 +3,7 @@
     var $removeBtn, $editBtn, $createBtn;
     var $firstNameFld, $lastNameFld;
     var $userRowTemplate, $tbody;
-    var userService = new AdminUserServiceClient();
+    var userService = new UserService();
     $(main);
 
     function main() {

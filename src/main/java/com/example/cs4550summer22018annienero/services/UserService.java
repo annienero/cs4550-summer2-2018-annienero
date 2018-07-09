@@ -27,27 +27,27 @@ public class UserService {
         return (List<User>) userRepository.findAll();
     }
 
-    @GetMapping("/api/user/id")
-    public User findUserById() {
-        // TODO how do i parse the path
-        // how do i jsonify the user... what even should be the signature of this method
-        return userRepository.findById(0).get();
+    @GetMapping("/api/user/{id}")
+    public User findUserById(@PathVariable("id") String id) {
+        int userId = Integer.parseInt(id);
+        return userRepository.findById(userId).get();
     }
 
-    @PutMapping("/api/user/id")
-    public void updateUser(@RequestBody User user) {
-        //TODO userRepository.what(id, user);
+    @PutMapping("/api/user/{id}")
+    public void updateUser(@PathVariable("id") String id, @RequestBody User user) {
+        int userId = Integer.parseInt(id);
+        //TODO userRepository.what(userId, user);
         // oh wait can i mutate things if so then
-        // User myUser = userRepository.findById(0).get();
+        // User myUser = userRepository.findById(userId).get();
         // myUser.allthefields = user.fields
         // prob make a method in user to do this?????????
 
     }
 
-    @DeleteMapping("/api/user/id")
-    public void deleteUser() {
-        //TODO parse
-        User myUser = userRepository.findById(0).get();
+    @DeleteMapping("/api/user/{id}")
+    public void deleteUser(@PathVariable("id") String id) {
+        int userId = Integer.parseInt(id);
+        User myUser = userRepository.findById(userId).get();
         userRepository.delete(myUser);
     }
 
@@ -83,9 +83,11 @@ public class UserService {
 
     @PutMapping("/api/profile")
     public User updateProfile(@RequestBody User user, HttpSession session) {
-        User currentUser = (User) session.getAttribute(USER); //TODO is this safe?
+        User currentUser = (User) session.getAttribute(USER);
         if (currentUser != null) {
-            //TODO get their id then update that user based on given one
+            //TODO update currentUser.updateUser(user);
+            userRepository.save(currentUser);
+            session.setAttribute(USER, currentUser);
             // TODO return updated user
         }
         return null;
@@ -93,7 +95,7 @@ public class UserService {
 
     @PostMapping("/api/logout")
     public User logout(HttpSession session) {
-        User currentUser = (User) session.getAttribute(USER); //TODO safe?
+        User currentUser = (User) session.getAttribute(USER);
         session.invalidate();
         return currentUser;
     }

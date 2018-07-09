@@ -1,4 +1,4 @@
-function AdminUserServiceClient() {
+function UserService() {
     this.createUser = createUser;
     this.findAllUsers = findAllUsers;
     this.findUserById = findUserById;
@@ -65,7 +65,8 @@ function AdminUserServiceClient() {
             body: userObjStr,
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            'credentials': 'include'
         });
       }
 
@@ -88,13 +89,13 @@ function AdminUserServiceClient() {
         })
     }
 
-    function updateProfile(userId, userObjStr, callback) {
-        // TODO wait java doesnt seem to use id plz help
-        // TODO: did i send id as path parameter tho did i do anything
-        var path = '/api/user';
-        fetch(path, {
-            method: 'post',
-            body: userObjStr
+    function updateProfile(userObjStr, callback) {
+        fetch('/api/user', {
+            method: 'put',
+            body: userObjStr,
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
      }
 }

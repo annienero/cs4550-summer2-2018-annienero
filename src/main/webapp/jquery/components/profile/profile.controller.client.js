@@ -33,7 +33,7 @@
             phone: phoneStr,
             email: emailStr,
             role: roleStr,
-            dateOfBirth: dobStr //TODO format for dob? aka camel
+            date_of_birth: dobStr
         }
         
         var userObjStr = JSON.stringify(userObj);

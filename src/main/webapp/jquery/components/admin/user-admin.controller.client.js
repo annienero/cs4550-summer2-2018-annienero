@@ -29,8 +29,8 @@
         var userObj = {
             username: $usernameFld.val(),
             password: $passwordFld.val(),
-            firstName: $firstNameFld.val(), //TODO camel case or?
-            lastName: $lastNameFld.val()
+            first_name: $firstNameFld.val(),
+            last_name: $lastNameFld.val()
         }
 
         userService.createUser(JSON.stringify(userObj), null); //TODO i need CALLBACK
@@ -70,8 +70,8 @@
         var userObj = {
             username: $usernameFld.val(),
             password: $passwordFld.val(),
-            firstName: $firstNameFld.val(), //TODO camel case or?
-            lastName: $lastNameFld.val()
+            first_name: $firstNameFld.val(), //TODO camel case or?
+            last_name: $lastNameFld.val()
         }
 
         userService.updateUser(id, JSON.stringify(userObj), null); //TODO i need CALLBACK and id

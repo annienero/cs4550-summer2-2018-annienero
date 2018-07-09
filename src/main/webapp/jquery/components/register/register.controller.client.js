@@ -28,9 +28,17 @@
         
         var userObjStr = JSON.stringify(userObj)
         
-        userService.register(userObjStr, null) // TODO: how to get callback
-        
-        // TODO what to do when username taken? just alert?
+        // TODO return from service for then????????????
+        userService.register(userObjStr, null).then(registrationSuccessful, registrationFailed); // TODO: how to get callback
+    }
+
+    function registrationSuccessful() {
+        alert('yay');
+        window.location.href = '/profile.template.client.html';
+    }
+
+    function registrationFailed() {
+        alert('oops');
     }
 })();
 

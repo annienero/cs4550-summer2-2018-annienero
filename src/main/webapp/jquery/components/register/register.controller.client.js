@@ -1,5 +1,4 @@
 (function () {
-    //equivalant to var $usernameFld = jQuery('username')
     var $usernameFld, $passwordFld, $password2Fld;
     var $registerBtn;
 

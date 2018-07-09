@@ -70,14 +70,14 @@ function AdminUserServiceClient() {
       }
 
     function login(userObjStr, callback) {
-        fetch('/api/login', {
+        var promise = fetch('/api/login', {
             method: 'get',
             body: userObjStr,
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-
+        return promise;
         // TODO: shoul i retrn or smth, how to say if it worked or not?
     }
 

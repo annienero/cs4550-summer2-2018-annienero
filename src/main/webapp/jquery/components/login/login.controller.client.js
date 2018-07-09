@@ -24,11 +24,21 @@
         
         var userObjStr = JSON.stringify(userObj)
         
-        userService.login(userObjStr, null) // TODO   callback
+        //TODO idk if user service returning the right thing so i can then
+        userService.login(userObjStr, null).then(loginSuccessful, loginFailed) // TODO   callback
 
 
         //TODO if this fails, just alert?
 
         //TODO if it doesn't, should i take them to ???
      }
+
+     function loginSuccessful() {
+        alert('yay');
+        window.location.href = '/profile.template.client.html';
+    }
+
+    function loginFailed() {
+        alert('oops');
+    }
 })();

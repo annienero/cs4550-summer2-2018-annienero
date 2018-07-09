@@ -35,12 +35,14 @@ function UserService() {
      }
 
     function findUserById(userId, callback) { 
+        var user;
         var path = '/api/user' + userId;
         fetch(path, {
             method: 'get'
+        }).then(function(response) {
+            user = response.json();
         })
-
-        // TODO: return a user (is that what fetch gives?)
+        return user;
      }
 
     function updateUser(userId, userObjStr, callback) {
@@ -84,7 +86,8 @@ function UserService() {
             'credentials': 'include'
         });
         return promise;
-        // TODO: shoul i retrn or smth, how to say if it worked or not?
+
+        //TODO is that how to return status or?
     }
 
     function logout(callback) {

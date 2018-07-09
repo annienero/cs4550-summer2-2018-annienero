@@ -1,6 +1,6 @@
 (function () {
     //equivalant to var $usernameFld = jQuery('username')
-    var $usernameFld, $phoneFld, $emailFld, $roleFld, $dobField;
+    var $usernameFld, $phoneFld, $emailFld, $roleFld, $dobFld;
     var $updateBtn, $logoutBtn;
 
     var userService = new UserService();

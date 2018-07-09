@@ -64,10 +64,9 @@ public class UserService {
     public User register(@RequestBody User user, HttpSession session) {
         User myUser = userRepository.findUserByUsername(user.getUsername());
         if (myUser == null) {
-            userRepository.save(user);
-            // TODO add the new user to the session attribute "user" to set the new user as currently logged in
-            session.setAttribute(USER, user);
-            return user;
+            myUser = userRepository.save(user);
+            session.setAttribute(USER, myUser);
+            return myUser;
         }
         return null;
     }
@@ -78,7 +77,6 @@ public class UserService {
         if (myUser == null) {
             return null;
         }
-        // TODO  add the user to the HTTP session... Save the found user in a session variable called "user"
         session.setAttribute(USER, myUser);
         return myUser;
     }
@@ -96,7 +94,7 @@ public class UserService {
     @PostMapping("/api/logout")
     public User logout(HttpSession session) {
         User currentUser = (User) session.getAttribute(USER); //TODO safe?
-        session.removeAttribute(USER);
+        session.invalidate();
         return currentUser;
     }
 

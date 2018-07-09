@@ -41,6 +41,7 @@
      }
 
     function findAllUsers() {
+        //TODO not sure this is actually returning list properly
         renderUsers(userService.findAllUsers(null)); //TODO needs a callback
      }
 

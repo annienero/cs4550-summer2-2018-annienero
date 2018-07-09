@@ -24,11 +24,13 @@ function UserService() {
         // TODO why callback why why why
         // TODO: do i need to do anything else to make this make sense/work or like
         // wait how does get even work pls help me
+        var users;
         fetch('/api/user', {
             method: 'get'
         }).then(function(response) {
-            console.log(response.json())
+            users = response.json();
         })
+        return users;
         // TODO: do i return something that would prob make sense but how
      }
 
@@ -78,7 +80,8 @@ function UserService() {
             body: userObjStr,
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            'credentials': 'include'
         });
         return promise;
         // TODO: shoul i retrn or smth, how to say if it worked or not?
@@ -86,7 +89,9 @@ function UserService() {
 
     function logout(callback) {
         fetch('/api/profile', {
-            method: 'post'
+            method: 'post',
+            'credentials': 'include'
+            //TODO do i only need credentials when actual user (not just their info) changes or always?
         })
     }
 

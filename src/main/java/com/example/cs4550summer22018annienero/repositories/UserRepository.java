@@ -2,10 +2,12 @@ package com.example.cs4550summer22018annienero.repositories;
 
 
 import com.example.cs4550summer22018annienero.models.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
-    //TODO these need parameters? how/where do i even implement?
-    User findUserByUsername();
-    User findUserByUsernameAndPassword();
+    @Query("SELECT user FROM User user WHERE user.username=:username")
+    User findUserByUsername(String username);
+    @Query("SELECT user FROM User user WHERE user.username=:username AND user.username=:password")
+    User findUserByUsernameAndPassword(String username, String password);
 }

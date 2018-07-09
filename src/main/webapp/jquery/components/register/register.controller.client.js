@@ -17,6 +17,8 @@
         var usernameStr = $usernameFld.val();
         var passwordStr = $passwordFld.val();
         var password2Str = $password2Fld.val();
+
+        //TODO ensure same pwds
     
         // make JSON of user info
         var userObj = {

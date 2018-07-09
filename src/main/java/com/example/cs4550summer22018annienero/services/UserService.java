@@ -52,9 +52,9 @@ public class UserService {
     }
 
     @GetMapping("/api/user") //TODO is that right path?
-    public User findUserByUsername(@RequestBody String username) { //TODO what should be the signature of this method?
+    public User findUserByUsername(@RequestBody User user) { //TODO what should be the signature of this method?
         //"parses the username from a query parameter called username" (???????)
-        return userRepository.findUserByUsername();
+        return userRepository.findUserByUsername(user.getUsername());
 
         //TODO Note that you might need to refactor the findAllUsers() method.
         //HUH
@@ -62,7 +62,7 @@ public class UserService {
 
     @PostMapping("/api/register")
     public User register(@RequestBody User user, HttpSession session) {
-        User myUser = userRepository.findUserByUsername();
+        User myUser = userRepository.findUserByUsername(user.getUsername());
         if (myUser == null) {
             userRepository.save(user);
             // TODO add the new user to the session attribute "user" to set the new user as currently logged in
@@ -74,7 +74,7 @@ public class UserService {
 
     @PostMapping("/api/login")
     public User login(@RequestBody User user, HttpSession session) {
-        User myUser = userRepository.findUserByUsernameAndPassword();
+        User myUser = userRepository.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (myUser == null) {
             return null;
         }

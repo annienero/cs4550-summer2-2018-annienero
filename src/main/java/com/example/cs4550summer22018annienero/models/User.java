@@ -91,6 +91,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
+    //TODO are the fields just null when json doesnt have them???
     public void updateUser(User user) {
         if (user.firstName != null) {
             this.firstName = user.firstName;

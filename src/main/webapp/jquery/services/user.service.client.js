@@ -15,7 +15,6 @@ function UserService() {
         fetch('/api/user', {
             method: 'post',
             body: userObjStr, 
-            // TODO point of below and do i even need
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -46,7 +45,10 @@ function UserService() {
         var path = '/api/user' + userId;
         fetch(path, {
             method: 'post',
-            body: userObjStr
+            body: userObjStr, 
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
      }
 

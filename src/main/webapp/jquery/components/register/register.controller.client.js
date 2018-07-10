@@ -20,7 +20,18 @@
         var passwordStr = $passwordFld.val();
         var password2Str = $password2Fld.val();
 
-        //TODO ensure same pwds
+        if (passwordStr == "") {
+            alert("Set a username");
+            return;
+        }
+        if (passwordStr == "") {
+            alert("Set a password");
+            return;
+        }
+        if (passwordStr != password2Str) {
+            alert("Passwords do not match");
+            return;
+        }
     
         // make JSON of user info
         var userObj = {
@@ -31,18 +42,17 @@
         
         var userObjStr = JSON.stringify(userObj)
         
-        userService.register(userObjStr).then(registrationSuccessful, registrationSuccessful); // TODO: how to get callback
-        
+        userService
+            .register(userObjStr)
+            .then(registrationSuccessful, registrationFailed);
     }
 
     function registrationSuccessful() {
-        alert('yay');
-        window.location.href = '/../profile/profile.template.client.html';
+        window.location.href = '/jquery/components/profile/profile.template.client.html';
     }
 
-    //TODO use this
     function registrationFailed() {
-        alert('oops');
+        alert('server is rip my life is rip');
     }
 })();
 

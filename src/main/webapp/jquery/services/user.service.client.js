@@ -10,7 +10,7 @@ function UserService() {
     this.updateProfile = updateProfile;
     this.getCurrentUser = getCurrentUser;
 
-    this.url = 'http://localhost:8080/api/user'; //TODO r u sure lol
+    this.url = '/api/user';
     var self = this;
 
     function createUser(userObjStr) { 

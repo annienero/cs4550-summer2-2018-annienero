@@ -48,7 +48,7 @@ public class UserService {
         userRepository.delete(myUser);
     }
 
-    @GetMapping("/api/user/{username}")
+    @GetMapping("/api/register/{username}")
     public User findUserByUsername(@PathVariable("username") String username) {
         return userRepository.findUserByUsername(username);
     }

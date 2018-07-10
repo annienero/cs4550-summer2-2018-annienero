@@ -100,7 +100,8 @@ function UserService() {
          //TODO is this kinda the right idea w returning stuff?
         var user;
         fetch('/api/profile', {
-            method: 'get'
+            method: 'get',
+            'credentials': 'include'
         }).then(function(response) {
             user = response.json();
         })

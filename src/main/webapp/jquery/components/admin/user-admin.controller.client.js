@@ -95,7 +95,7 @@
            var user = users[u];
            var $row = $userRowTemplate.clone();
            $row.find('.wbdv-username')
-      .html(user.username);
+                .html(user.username);
            $tbody.append($row);
       }}
       

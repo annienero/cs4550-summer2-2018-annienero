@@ -19,18 +19,33 @@
         var password2Str = $password2Fld.val();
 
         //TODO ensure same pwds
-
+    
         // make JSON of user info
         var userObj = {
             username: usernameStr,
             password: passwordStr,
             password2: password2Str
         }
-
+        
         var userObjStr = JSON.stringify(userObj)
-
+        
         // TODO return from service for then????????????
-        userService.register(userObjStr, null).then(registrationSuccessful, registrationFailed); // TODO: how to get callback
+        userService.register(userObjStr).then(
+            // function(response) {
+            // console.log(response)
+            // if (response == null) {
+            //     registrationFailed();
+            // } else {
+            //     registrationSuccessful();
+            // }
+        // }
+            handleResponse
+        ); // TODO: how to get callback
+        
+    }
+
+    function handleResponse() {
+        alert("response")
     }
 
     function registrationSuccessful() {

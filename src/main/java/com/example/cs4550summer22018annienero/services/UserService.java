@@ -95,7 +95,8 @@ public class UserService {
         user.setUsername("annie");
         session.setAttribute(USER, user);
         //TODO end test
-        return (User) session.getAttribute(USER);
+        //return (User) session.getAttribute(USER);
+        return user;
     }
 
     @PostMapping("/api/logout")

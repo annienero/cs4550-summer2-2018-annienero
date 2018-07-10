@@ -43,7 +43,6 @@
      }
 
     function findAllUsers() {
-        //TODO not sure this is actually returning list properly
         userService.findAllUsers(renderUsers);
      }
 
@@ -53,14 +52,6 @@
         
         // TODO update the form on server response (vv probably?)
         findAllUsers();
-     }
-
-    function deleteUser() {
-        // TODO how get id
-        userService.deleteUser(id, null); //TODO need callback
-
-         // TODO update the form on server response vvv ???
-         findAllUsers();
      }
 
     function selectUser() { 
@@ -123,6 +114,8 @@ for(var i=0; i<users.length; i++) {
         var $button = $(event.currentTarget);
         var id = $button.attr('id');
 
-        userService.deleteUser(id);
+        userService.deleteUser(id); //TODO callback?
+
+        findAllUsers();
     }
 })();

@@ -51,8 +51,6 @@ public class UserService {
     @GetMapping("/api/user/{username}")
     public User findUserByUsername(@PathVariable("username") String username) {
         return userRepository.findUserByUsername(username);
-        //TODO Note that you might need to refactor the findAllUsers() method.
-        //HUH
     }
 
     @PostMapping("/api/register")
@@ -90,13 +88,7 @@ public class UserService {
 
     @GetMapping("/api/profile")
     public User getCurrentUser(HttpSession session) {
-        //TODO for test
-        User user = new User();
-        user.setUsername("annie");
-        session.setAttribute(USER, user);
-        //TODO end test
-        //return (User) session.getAttribute(USER);
-        return user;
+        return (User) session.getAttribute(USER);
     }
 
     @PostMapping("/api/logout")

@@ -19,23 +19,23 @@
         var password2Str = $password2Fld.val();
 
         //TODO ensure same pwds
-    
+
         // make JSON of user info
         var userObj = {
             username: usernameStr,
             password: passwordStr,
             password2: password2Str
         }
-        
+
         var userObjStr = JSON.stringify(userObj)
-        
+
         // TODO return from service for then????????????
         userService.register(userObjStr, null).then(registrationSuccessful, registrationFailed); // TODO: how to get callback
     }
 
     function registrationSuccessful() {
         alert('yay');
-        window.location.href = '/profile.template.client.html';
+        window.location.href = '/jquery/components/profile/profile.template.client.html';
     }
 
     function registrationFailed() {

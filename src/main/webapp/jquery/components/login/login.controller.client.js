@@ -35,7 +35,7 @@
 
      function loginSuccessful() {
         alert('yay');
-        window.location.href = '/profile.template.client.html';
+        window.location.href = '/jquery/components/profile/profile.template.client.html';
     }
 
     function loginFailed() {

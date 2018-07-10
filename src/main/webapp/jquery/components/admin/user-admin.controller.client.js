@@ -90,12 +90,39 @@
 
 
      function renderUsers(users) {
-        $tbody.empty();
-        for(var u in users) {
-           var user = users[u];
-           var $row = $userRowTemplate.clone();
-           $row.find('.wbdv-username')
-                .html(user.username);
-           $tbody.append($row);
-      }}  
+        // $tbody.empty();
+        // for(var u in users) {
+        //    var user = users[u];
+        //    var $row = $userRowTemplate.clone();
+        //    $row.find('.wbdv-username')
+        //         .html(user.username);
+        //    $tbody.append($row);
+        // }
+var tbody = $('tbody');
+tbody.empty();
+
+for(var i=0; i<users.length; i++) {
+        var user = users[i];
+        var tr = $('<tr>');
+        var td = $('<td>');
+        td.append(user.username);
+        tbody.append(tr);
+
+        
+        var deleteBtn = $('<button>DELETE</button>');
+        deleteBtn.click(deleteUser);
+        deleteBtn.attr('id', user.id);
+        td.append(deleteBtn);
+        tr.append(td);
+
+
+}
+    } 
+    
+    function deleteUser(event) {
+        var $button = $(event.currentTarget);
+        var id = $button.attr('id');
+
+        userService.deleteUser(id);
+    }
 })();

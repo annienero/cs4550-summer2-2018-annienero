@@ -29,7 +29,7 @@ function UserService() {
      
 
     function findUserById(userId) {
-        fetch(
+        return fetch(
             self.url + '/' + userId)
             .then(function(response) {
                 return response.json();

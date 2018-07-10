@@ -83,33 +83,27 @@
     function deleteUser(event) {
         var $button = $(event.currentTarget);
         var id = $button.attr('id');
-
-        userService.deleteUser(id); //TODO callback? vvvvv
-
-        findAllUsers();
+        userService.deleteUser(id).then(findAllUsers);
     }
 
     function selectUser() { 
         var $button = $(event.currentTarget);
         curUserId = $button.attr('id');
-        renderUser(findUserById())
-            .then(function() {
-                $createBtn.hide();
-                $updateBtn.show();
-            })
+        findUserById(curUserId);
     }
 
-    //TODO not working
     function findUserById() { 
-        return userService.findUserById(curUserId);
+        return userService.findUserById(curUserId).then(renderUser);
      }
 
-    function renderUser(user) { 
+    function renderUser(user) {
         $usernameFld.val(user.username);
         $passwordFld.val(user.password);
         $firstNameFld.val(user.firstName);
         $lastNameFld.val(user.lastName);
         $roleFld.val(user.role);
+        $createBtn.hide();
+        $updateBtn.show();
      }
 
     function updateUser() { 

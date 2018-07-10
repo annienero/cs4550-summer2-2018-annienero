@@ -5,6 +5,8 @@
     var userService = new UserService();
     $(main);
 
+    //TODO show error if username is taken
+
     function main() {
         $usernameFld = $('#username');
         $passwordFld = $('#password');
@@ -29,30 +31,16 @@
         
         var userObjStr = JSON.stringify(userObj)
         
-        // TODO return from service for then????????????
-        userService.register(userObjStr).then(
-            // function(response) {
-            // console.log(response)
-            // if (response == null) {
-            //     registrationFailed();
-            // } else {
-            //     registrationSuccessful();
-            // }
-        // }
-            handleResponse
-        ); // TODO: how to get callback
+        userService.register(userObjStr).then(registrationSuccessful, registrationSuccessful); // TODO: how to get callback
         
-    }
-
-    function handleResponse() {
-        alert("response")
     }
 
     function registrationSuccessful() {
         alert('yay');
-        window.location.href = '/jquery/components/profile/profile.template.client.html';
+        window.location.href = '/../profile/profile.template.client.html';
     }
 
+    //TODO use this
     function registrationFailed() {
         alert('oops');
     }

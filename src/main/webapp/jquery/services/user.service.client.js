@@ -48,19 +48,15 @@ function UserService() {
         );
     }
      
-    function register(userObjStr, callback) { 
-        fetch('/api/register', {
+    function register(userObjStr) { 
+        return fetch(self.url, {
             method: 'post',
             body: userObjStr,
             headers: {
                 'Content-Type': 'application/json'
             },
             'credentials': 'include'
-        }).then(function(response) {
-            // TODO could come back as null
-            console.log(response);
-            return response;
-        });
+        })
       }
 
     function login(userObjStr, callback) {

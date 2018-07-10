@@ -10,7 +10,7 @@ function UserService() {
     this.updateProfile = updateProfile;
     this.getCurrentUser = getCurrentUser;
 
-    this.url = 'http://localhost:8080/api/user';
+    this.url = 'http://localhost:8080/api/user'; //TODO r u sure lol
     var self = this;
 
     function createUser(userObjStr) { 
@@ -29,8 +29,11 @@ function UserService() {
      
 
     function findUserById(userId) {
-        return fetch(
-            self.url + '/' + userId);
+        fetch(
+            self.url + '/' + userId)
+            .then(function(response) {
+                return response.json();
+            });
     }
 
      function updateUser(userId, userObjStr) {

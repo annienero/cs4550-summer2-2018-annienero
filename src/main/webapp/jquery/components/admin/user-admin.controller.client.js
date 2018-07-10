@@ -1,26 +1,27 @@
 (function () {
     var $usernameFld, $passwordFld;
-    var $removeBtn, $editBtn, $createBtn;
-    var $firstNameFld, $lastNameFld;
+    var $updateBtn, $createBtn;
+    var $firstNameFld, $lastNameFld, $roleFld;
     var $userRowTemplate, $tbody;
     var userService = new UserService();
+    var curUserId = -1;
     $(main);
 
     function main() {
-        $usernameFld = $('#usernameFld'); //TODO do these update dynamically or do i have to call this again?
+        $usernameFld = $('#usernameFld');
         $passwordFld = $('#passwordFld');
-        $removeBtn = $('#removeBtn');
-        $editBtn = $('#editBtn');
-        $createBtn = $('#createBtn');
+        $createBtn = $('.wbdv-create');
+        $updateBtn = $('.wbdv-update');
+        $updateBtn.hide();
         $firstNameFld = $('#firstNameFld');
         $lastNameFld = $('#lastNameFld');
+        $roleFld = $('#roleFld');
         $userRowTemplate = $('.wbdv-template.wbdv-user')
            .clone()
            .removeClass('wbdv-hidden');
         $tbody = $('#tbody');
 
-        $removeBtn.click(deleteUser);
-        $editBtn.click(updateUser);
+        $updateBtn.click(updateUser);
         $createBtn.click(createUser);
         $userRowTemplate.click(selectUser);
 
@@ -32,13 +33,14 @@
             username: $usernameFld.val(),
             password: $passwordFld.val(),
             first_name: $firstNameFld.val(),
-            last_name: $lastNameFld.val()
+            last_name: $lastNameFld.val(),
+            role: $roleFld.val()
         }
 
         userService.createUser(JSON.stringify(userObj));
 
-         // TODO update the form on server response.. did i do it ?
-         // how do i know when response?
+         // TODO then do vvvv
+         clearCurUser();
          findAllUsers();
      }
 
@@ -46,76 +48,92 @@
         userService.findAllUsers(renderUsers);
      }
 
-    function findUserById() { 
-        //  TODO Reads the user id from the icon id attribute. 
-        userService.findUserById(id, null); //TODO what is id and what is callback
-        
-        // TODO update the form on server response (vv probably?)
-        findAllUsers();
-     }
-
-    function selectUser() { 
-        //  TODO haha this one doesnt even have a description hahah how tf would i even see what row got selected haha
-     }
-
-    function updateUser() { 
-        //  TODO Reads the user is from the icon id attribute
-        //  TODO what is icon id attribute
-        var userObj = {
-            username: $usernameFld.val(),
-            password: $passwordFld.val(),
-            first_name: $firstNameFld.val(), //TODO camel case or?
-            last_name: $lastNameFld.val()
-        }
-
-        userService.updateUser(id, JSON.stringify(userObj), null); //TODO i need CALLBACK and id
-
-         // TODO update the form on server response vvv???
-         findAllUsers();
-     }
-
-    function renderUser(user) { 
-        //  TODO accepts a user object as parameter and updates the form with the user properties
-        //  TODO HUHHHH ... how to update the form????? if you select isn't it alr there?
-     }
-
-
      function renderUsers(users) {
-        // $tbody.empty();
-        // for(var u in users) {
-        //    var user = users[u];
-        //    var $row = $userRowTemplate.clone();
-        //    $row.find('.wbdv-username')
-        //         .html(user.username);
-        //    $tbody.append($row);
-        // }
-var tbody = $('tbody');
-tbody.empty();
+        $tbody.empty();
+        for(var u in users) {
+            var user = users[u];
+            var $row = $userRowTemplate.clone();
+            $row.find('.wbdv-username')
+                 .html(user.username);
+            $row.find('.wbdv-password')
+                 .html(user.password);
+            $row.find('.wbdv-first-name')
+                 .html(user.firstName);
+            $row.find('.wbdv-last-name')
+                 .html(user.lastName);
+            $row.find('.wbdv-role')
+                 .html(user.role);
+            $tbody.append($row);
 
-for(var i=0; i<users.length; i++) {
-        var user = users[i];
-        var tr = $('<tr>');
-        var td = $('<td>');
-        td.append(user.username);
-        tbody.append(tr);
+            var deleteBtn = $row.find('.wbdv-remove');
+            deleteBtn.click(deleteUser);
+            deleteBtn.attr('id', user.id);
 
-        
-        var deleteBtn = $('<button>DELETE</button>');
-        deleteBtn.click(deleteUser);
-        deleteBtn.attr('id', user.id);
-        td.append(deleteBtn);
-        tr.append(td);
-
-
-}
+            var editBtn = $row.find('.wbdv-edit');
+            editBtn.click(selectUser);
+            editBtn.attr('id', user.id);
+            editBtn.attr('username', user.username);
+            editBtn.attr('password', user.password);
+            editBtn.attr('firstName', user.firstName);
+            editBtn.attr('lastName', user.lastName);
+            editBtn.attr('role', user.role);
+        }
     } 
     
     function deleteUser(event) {
         var $button = $(event.currentTarget);
         var id = $button.attr('id');
 
-        userService.deleteUser(id); //TODO callback?
+        userService.deleteUser(id); //TODO callback? vvvvv
 
         findAllUsers();
     }
+
+    function selectUser() { 
+        var $button = $(event.currentTarget);
+        curUserId = $button.attr('id');
+        renderUser(findUserById())
+            .then(function() {
+                $createBtn.hide();
+                $updateBtn.show();
+            })
+    }
+
+    //TODO not working
+    function findUserById() { 
+        return userService.findUserById(curUserId);
+     }
+
+    function renderUser(user) { 
+        $usernameFld.val(user.username);
+        $passwordFld.val(user.password);
+        $firstNameFld.val(user.firstName);
+        $lastNameFld.val(user.lastName);
+        $roleFld.val(user.role);
+     }
+
+    function updateUser() { 
+        var userObj = {
+            username: $usernameFld.val(),
+            password: $passwordFld.val(),
+            first_name: $firstNameFld.val(),
+            last_name: $lastNameFld.val(),
+            role: $roleFld.val()
+        }
+        userService.updateUser(curUserId, JSON.stringify(userObj)).then(afterUserUpdated);  // TODO then not working       
+     }
+
+     function afterUserUpdated() {
+        clearCurUser();
+        findAllUsers();
+     }
+
+     function clearCurUser() {
+        $createBtn.show();
+        $updateBtn.hide();
+        $usernameFld.val('');
+        $passwordFld.val('');
+        $firstNameFld.val('');
+        $lastNameFld.val('');
+     }
 })();

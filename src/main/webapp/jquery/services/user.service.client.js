@@ -10,61 +10,44 @@ function UserService() {
     this.updateProfile = updateProfile;
     this.getCurrentUser = getCurrentUser;
 
-    this.url = 'http://localhost:8080/api/user';  // TODO: r u sure
+    this.url = 'http://localhost:8080/api/user';
     var self = this;
 
-    function createUser(userObjStr, callback) { 
-        // TODO: what is callback and why
-        fetch('/api/user', {
+    function createUser(userObjStr) { 
+        fetch(self.url, {
             method: 'post',
             body: userObjStr, 
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-     }
-    function findAllUsers(callback) { 
-        // TODO why callback why why why
-        var users;
-        fetch('/api/user', {
-            method: 'get'
-        }).then(function(response) {
-            users = response.json();
-        })
-        return users;
-     }
-
-    function findUserById(userId, callback) { 
-        var user;
-        var path = '/api/user' + userId;
-        fetch(path, {
-            method: 'get'
-        }).then(function(response) {
-            user = response.json();
-        })
-        return user;
-     }
-
-    function updateUser(userId, userObjStr, callback) {
-        var path = '/api/user' + userId;
-        fetch(path, {
-            method: 'post',
-            body: userObjStr, 
-            headers: {
-                'Content-Type': 'application/json'
-            }
         })
      }
 
-    function deleteUser(userId, callback) { 
-        var path = '/api/user' + userId;
-        fetch(path, {
-            method: 'delete'
+     function findAllUsers(callback) {
+        return $.ajax({
+            url: self.url,
+            success: callback
         })
+     }
+     
 
-        // TODO: it tell me to receive status but how and what and HELP ME
+    function findUserById(userId) {
+        return fetch(
+            self.url + '/' + userId);
+    }
+
+     function updateUser(userId, userObjStr) {
+        return fetch(self.url + '/' + userId, {
+            method: 'put',
+            body: userObjStr
+        });
      }
 
+    // TODO: it tell me to receive status but how and what and HELP ME
+    function deleteUser(userId, callback) {
+        return fetch(
+            self.url + '/' + userId,
+            { method: 'delete' }
+        );
+    }
+     
     function register(userObjStr, callback) { 
         fetch('/api/register', {
             method: 'post',
@@ -73,6 +56,10 @@ function UserService() {
                 'Content-Type': 'application/json'
             },
             'credentials': 'include'
+        }).then(function(response) {
+            // TODO could come back as null
+            console.log(response);
+            return response;
         });
       }
 

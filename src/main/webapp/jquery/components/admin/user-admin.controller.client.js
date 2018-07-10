@@ -14,7 +14,9 @@
         $createBtn = $('#createBtn');
         $firstNameFld = $('#firstNameFld');
         $lastNameFld = $('#lastNameFld');
-        $userRowTemplate = $('#userRowTemplate');
+        $userRowTemplate = $('.wbdv-template.wbdv-user')
+           .clone()
+           .removeClass('wbdv-hidden');
         $tbody = $('#tbody');
 
         $removeBtn.click(deleteUser);
@@ -33,7 +35,7 @@
             last_name: $lastNameFld.val()
         }
 
-        userService.createUser(JSON.stringify(userObj), null); //TODO i need CALLBACK
+        userService.createUser(JSON.stringify(userObj));
 
          // TODO update the form on server response.. did i do it ?
          // how do i know when response?
@@ -42,7 +44,7 @@
 
     function findAllUsers() {
         //TODO not sure this is actually returning list properly
-        renderUsers(userService.findAllUsers(null)); //TODO needs a callback
+        userService.findAllUsers(renderUsers);
      }
 
     function findUserById() { 
@@ -87,10 +89,14 @@
      }
 
 
-    function renderUsers(users) { 
-        //TODO this is a bad guess
-        users.forEach(element => {
-            element.renderUser();
-        });
-     }
+     function renderUsers(users) {
+        $tbody.empty();
+        for(var u in users) {
+           var user = users[u];
+           var $row = $userRowTemplate.clone();
+           $row.find('.wbdv-username')
+      .html(user.username);
+           $tbody.append($row);
+      }}
+      
 })();

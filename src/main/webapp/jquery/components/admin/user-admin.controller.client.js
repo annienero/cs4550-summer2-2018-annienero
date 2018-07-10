@@ -32,16 +32,12 @@
         var userObj = {
             username: $usernameFld.val(),
             password: $passwordFld.val(),
-            first_name: $firstNameFld.val(),
-            last_name: $lastNameFld.val(),
+            firstName: $firstNameFld.val(),
+            lastName: $lastNameFld.val(),
             role: $roleFld.val()
         }
 
-        userService.createUser(JSON.stringify(userObj));
-
-         // TODO then do vvvv
-         clearCurUser();
-         findAllUsers();
+        userService.createUser(JSON.stringify(userObj)).then(clearCurUser);
      }
 
     function findAllUsers() {
@@ -110,11 +106,12 @@
         var userObj = {
             username: $usernameFld.val(),
             password: $passwordFld.val(),
-            first_name: $firstNameFld.val(),
-            last_name: $lastNameFld.val(),
+            firstName: $firstNameFld.val(),
+            lastName: $lastNameFld.val(),
             role: $roleFld.val()
         }
-        userService.updateUser(curUserId, JSON.stringify(userObj)).then(afterUserUpdated);  // TODO then not working       
+        usrObjStr = JSON.stringify(userObj);
+        userService.updateUser(curUserId, usrObjStr).then(afterUserUpdated);    
      }
 
      function afterUserUpdated() {
@@ -129,5 +126,6 @@
         $passwordFld.val('');
         $firstNameFld.val('');
         $lastNameFld.val('');
+        findAllUsers();
      }
 })();

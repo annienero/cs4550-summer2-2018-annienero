@@ -14,9 +14,12 @@ function UserService() {
     var self = this;
 
     function createUser(userObjStr) { 
-        fetch(self.url, {
+        return fetch(self.url, {
             method: 'post',
-            body: userObjStr, 
+            body: userObjStr,
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
      }
 
@@ -39,12 +42,14 @@ function UserService() {
      function updateUser(userId, userObjStr) {
         return fetch(self.url + '/' + userId, {
             method: 'put',
-            body: userObjStr
+            body: userObjStr,
+            headers: {
+                'Content-Type': 'application/json'
+            },
         });
      }
 
-    // TODO: it tell me to receive status but how and what and HELP ME
-    function deleteUser(userId, callback) {
+    function deleteUser(userId) {
         return fetch(
             self.url + '/' + userId,
             { method: 'delete' }

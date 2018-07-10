@@ -78,7 +78,7 @@ function UserService() {
     }
 
     function logout(callback) {
-        fetch('/api/logout', {
+        return fetch('/api/logout', {
             method: 'post',
             'credentials': 'include'
             //TODO do i only need credentials when actual user (not just their info) changes or always?

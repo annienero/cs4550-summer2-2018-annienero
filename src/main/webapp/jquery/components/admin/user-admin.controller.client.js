@@ -97,6 +97,5 @@
            $row.find('.wbdv-username')
                 .html(user.username);
            $tbody.append($row);
-      }}
-      
+      }}  
 })();

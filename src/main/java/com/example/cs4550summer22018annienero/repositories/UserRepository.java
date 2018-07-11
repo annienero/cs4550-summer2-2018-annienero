@@ -8,6 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("SELECT user FROM User user WHERE user.username=:username")
     User findUserByUsername(String username);
-    @Query("SELECT user FROM User user WHERE user.username=:username AND user.username=:password")
+    @Query("SELECT user FROM User user WHERE user.username=:username AND user.password=:password")
     User findUserByUsernameAndPassword(String username, String password);
 }

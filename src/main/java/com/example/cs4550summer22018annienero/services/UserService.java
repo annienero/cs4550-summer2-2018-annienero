@@ -88,7 +88,10 @@ public class UserService {
 
     @GetMapping("/api/profile")
     public User getCurrentUser(HttpSession session) {
-        return (User) session.getAttribute(USER);
+        User u = new User();
+        u.setFirstName("annietest");
+        return u;
+        //return (User) session.getAttribute(USER);
     }
 
     @PostMapping("/api/logout")

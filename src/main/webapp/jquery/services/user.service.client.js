@@ -87,7 +87,7 @@ function UserService() {
             },
             'credentials': 'include'
         }).then(function(response) {
-            console.log(response.json());
+            return response.json();
         });
     }
 
@@ -112,15 +112,11 @@ function UserService() {
      //TODO callback bc idk?
      function getCurrentUser(callback) {
          //TODO is this kinda the right idea w returning stuff?
-        var user;
-        fetch('/api/profile', {
+        return fetch('/api/profile', {
             method: 'get',
             'credentials': 'include'
         }).then(function(response) {
-            user = response.json();
-        })
-        //TODO seems like this is just getting back a null
-        console.log(user);
-        return user;
+            return response.json();
+        });
     }
 }

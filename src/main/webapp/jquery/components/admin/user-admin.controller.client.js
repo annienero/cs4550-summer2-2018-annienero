@@ -90,7 +90,7 @@
 
     function findUserById() { 
         return userService.findUserById(curUserId).then(renderUser);
-     }
+    }
 
     function renderUser(user) {
         $usernameFld.val(user.username);
@@ -100,7 +100,7 @@
         $roleFld.val(user.role);
         $createBtn.hide();
         $updateBtn.show();
-     }
+    }
 
     function updateUser() { 
         var userObj = {
@@ -112,12 +112,12 @@
         }
         usrObjStr = JSON.stringify(userObj);
         userService.updateUser(curUserId, usrObjStr).then(afterUserUpdated);    
-     }
+    }
 
      function afterUserUpdated() {
         clearCurUser();
         findAllUsers();
-     }
+    }
 
      function clearCurUser() {
         $createBtn.show();
@@ -127,5 +127,5 @@
         $firstNameFld.val('');
         $lastNameFld.val('');
         findAllUsers();
-     }
+    }
 })();

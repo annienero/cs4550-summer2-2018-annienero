@@ -19,18 +19,16 @@
         $logoutBtn = $('#logoutBtn');
         $logoutBtn.click(logoutHandler);
 
-        var user;
-        user = userService.getCurrentUser(null);
-        renderUser(user);
+        userService.getCurrentUser().then(renderUser);
     }
 
     function renderUser(user) {
-        $usernameFld.val(user.getUsername);
-        $firstNameFld.val(user.getFirstName);
-        $lastNameFld.val(user.getLastName);
-        $phoneFld.val(user.getPhone);
-        $emailFld.val(user.getEmail);
-        $roleFld.val(user.getRole);
+        $usernameFld.val(user.username);
+        $firstNameFld.val(user.firstName);
+        $lastNameFld.val(user.lastName);
+        $phoneFld.val(user.phone);
+        $emailFld.val(user.email);
+        $roleFld.val(user.role);
     }
     
     function updateHandler() {

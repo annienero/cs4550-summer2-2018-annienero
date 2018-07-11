@@ -77,7 +77,6 @@ function UserService() {
         })
       }
 
-      //TODO no work
     function login(userObjStr, callback) {
         return fetch('/api/login', {
             method: 'post',

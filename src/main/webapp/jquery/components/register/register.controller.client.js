@@ -35,12 +35,11 @@
         var userObj = {
             username: usernameStr,
             password: passwordStr,
-            password2: password2Str
         }
         
-        var userObjStr = JSON.stringify(userObj)
+        var userObjStr = JSON.stringify(userObj);
         userService
-            .register(usernameStr, userObjStr)
+            .register(userObjStr)
             .then(registrationSuccessful, registrationFailed);
     }
 

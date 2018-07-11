@@ -55,11 +55,10 @@ public class UserService {
 
     @PostMapping("/api/register")
     public User register(@RequestBody User user, HttpSession session) {
-        User myUser = userRepository.findUserByUsername(user.getUsername());
-        if (myUser == null) {
-            myUser = userRepository.save(user);
-            session.setAttribute(USER, myUser);
-            return myUser;
+        if (userRepository.findUserByUsername(user.getUsername()) == null) {
+            userRepository.save(user);
+            session.setAttribute(USER, user);
+            return user;
         }
         return null;
     }

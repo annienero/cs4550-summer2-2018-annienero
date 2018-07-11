@@ -56,9 +56,8 @@ function UserService() {
         );
     }
      
-    //TODO how to check for when its alr taken and then what to do
     function register(userObjStr) { 
-        return fetch(self.url, {
+        return fetch('/api/register', {
             method: 'post',
             body: userObjStr,
             'credentials': 'include',
@@ -70,7 +69,7 @@ function UserService() {
         });
     }
 
-    function login(userObjStr, callback) {
+    function login(userObjStr) {
         return fetch('/api/login', {
             method: 'post',
             body: userObjStr,
@@ -78,7 +77,9 @@ function UserService() {
             headers: {
                 'Content-Type': 'application/json'
             },
-        })
+        }).then(function(response) {
+            return response.json();
+        });
     }
 
     function logout() {
@@ -101,7 +102,7 @@ function UserService() {
         });
      }
 
-    function getCurrentUser(callback) {
+    function getCurrentUser() {
         return fetch('/api/profile', {
             method: 'get',
             'credentials': 'include'

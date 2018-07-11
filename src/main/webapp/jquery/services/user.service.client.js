@@ -57,60 +57,51 @@ function UserService() {
     }
      
     //TODO how to check for when its alr taken and then what to do
-    function register(username, userObjStr) { 
-        return fetch(self.url + '/' + username, {
-            method: 'get'
-        }).then(function(response) {
-            var user = response.json();
-            if (user.username == username) {
-                alert("rip");
-            } else {
-                return fetch(self.url, {
-                    method: 'post',
-                    body: userObjStr,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    'credentials': 'include'
-                })
-            }
-        })
-      }
-
-    function login(userObjStr, callback) {
-        return fetch('/api/login', {
+    function register(userObjStr) { 
+        return fetch(self.url, {
             method: 'post',
             body: userObjStr,
+            'credentials': 'include',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            'credentials': 'include'
+            }
         }).then(function(response) {
             return response.json();
         });
     }
 
-    function logout(callback) {
-        return fetch('/api/logout', {
+    function login(userObjStr, callback) {
+        return fetch('/api/login', {
             method: 'post',
-            'credentials': 'include'
-            //TODO do i only need credentials when actual user (not just their info) changes or always?
+            body: userObjStr,
+            'credentials': 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
         })
     }
 
-    function updateProfile(userObjStr, callback) {
-        fetch('/api/profile', {
+    function logout() {
+        return fetch('/api/logout', {
+            method: 'post',
+            'credentials': 'include'
+        })
+    }
+
+    function updateProfile(userObjStr) {
+        return fetch('/api/profile', {
             method: 'put',
             body: userObjStr,
+            'credentials': 'include',
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
+        }).then(function(response) {
+            return response.json();
+        });
      }
 
-     //TODO callback bc idk?
-     function getCurrentUser(callback) {
-         //TODO is this kinda the right idea w returning stuff?
+    function getCurrentUser(callback) {
         return fetch('/api/profile', {
             method: 'get',
             'credentials': 'include'

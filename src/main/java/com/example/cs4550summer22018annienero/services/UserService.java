@@ -77,13 +77,9 @@ public class UserService {
     @PutMapping("/api/profile")
     public User updateProfile(@RequestBody User user, HttpSession session) {
         User currentUser = (User) session.getAttribute(USER);
-        if (currentUser != null) {
-            currentUser.updateUser(user);
-            userRepository.save(currentUser);
-            session.setAttribute(USER, currentUser);
-            return currentUser;
-        }
-        return null;
+        currentUser.updateUser(user);
+        userRepository.save(currentUser);
+        return currentUser;
     }
 
     @GetMapping("/api/profile")

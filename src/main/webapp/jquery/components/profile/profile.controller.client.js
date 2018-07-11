@@ -1,5 +1,4 @@
 (function () {
-    //equivalant to var $usernameFld = jQuery('username')
     var $usernameFld, $firstNameFld, $lastNameFld, $phoneFld, $emailFld, $roleFld, $dobFld;
     var $updateBtn, $logoutBtn;
 
@@ -12,7 +11,7 @@
         $lastNameFld = $('#lastName');  
         $phoneFld = $('#phone');
         $emailFld = $('#email');
-        $roleFld = $('#role');
+        $roleFld = $('#roleFld');
         $dobFld = $('#dob');
         $updateBtn = $('#updateBtn');
         $updateBtn.click(updateHandler);
@@ -29,6 +28,7 @@
         $phoneFld.val(user.phone);
         $emailFld.val(user.email);
         $roleFld.val(user.role);
+        $dobFld.val(user.dateOfBirth);
     }
     
     function updateHandler() {
@@ -41,19 +41,26 @@
     
         // make JSON of user info (don't change username)
         var userObj = {
-            first_name: firstNameStr,
-            last_name: lastNameStr,
+            firstName: firstNameStr,
+            lastName: lastNameStr,
             phone: phoneStr,
             email: emailStr,
             role: roleStr,
-            date_of_birth: dobStr
+            dateOfBirth: dobStr
         }
         
         var userObjStr = JSON.stringify(userObj);
         
-        userService.updateProfile(userObjStr, null) // TODO: how to get callback
+        userService.updateProfile(userObjStr).then(onProfileUpdated, onProfileUpdatedFail);
+    }
 
-        //TODO show success when success update
+    function onProfileUpdated(user) {
+        alert('profile updated successfully');
+        renderUser(user);
+    }
+
+    function onProfileUpdatedFail(user) {
+        alert('profile update fail');
     }
 
     function logoutHandler() {

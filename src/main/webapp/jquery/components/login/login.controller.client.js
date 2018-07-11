@@ -28,11 +28,11 @@
 
     }
 
-    function loginSuccess(user) {
+    function loginSuccess() {
         window.location.href = '/jquery/components/profile/profile.template.client.html';
     }
 
-    function loginFailure(user) {
+    function loginFailure() {
         alert('bad login credentials');
     }
 })();

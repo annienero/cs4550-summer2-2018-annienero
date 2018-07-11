@@ -18,11 +18,11 @@
         var passwordStr = $passwordFld.val();
         var password2Str = $password2Fld.val();
 
-        if (passwordStr == "") {
+        if (passwordStr == '') {
             alert("Set a username");
             return;
         }
-        if (passwordStr == "") {
+        if (passwordStr == '') {
             alert("Set a password");
             return;
         }
@@ -41,11 +41,15 @@
         var userObjStr = JSON.stringify(userObj)
         userService
             .register(usernameStr, userObjStr)
-            .then(registrationSuccessful);
+            .then(registrationSuccessful, registrationFailed);
     }
 
     function registrationSuccessful() {
         window.location.href = '/jquery/components/profile/profile.template.client.html';
+    }
+
+    function registrationFailed() {
+        alert('username taken');
     }
 })();
 

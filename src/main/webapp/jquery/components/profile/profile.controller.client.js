@@ -57,10 +57,9 @@
     }
 
     function logoutHandler() {
-        //TODO just to be sure, idc who i log out bc there's only one so that's who i do???
-        userService.logout(function() {
+        userService.logout().then(function() {
             window.location.href = '/jquery/components/login/login.template.client.html';
-        }) // TODO: this doesnt work
+        })
     }
 })();
 

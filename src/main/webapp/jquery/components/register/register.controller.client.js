@@ -5,8 +5,6 @@
     var userService = new UserService();
     $(main);
 
-    //TODO show error if username is taken
-
     function main() {
         $usernameFld = $('#username');
         $passwordFld = $('#password');
@@ -41,18 +39,13 @@
         }
         
         var userObjStr = JSON.stringify(userObj)
-        
         userService
-            .register(userObjStr)
-            .then(registrationSuccessful, registrationFailed);
+            .register(usernameStr, userObjStr)
+            .then(registrationSuccessful);
     }
 
     function registrationSuccessful() {
         window.location.href = '/jquery/components/profile/profile.template.client.html';
-    }
-
-    function registrationFailed() {
-        alert('server is rip my life is rip');
     }
 })();
 

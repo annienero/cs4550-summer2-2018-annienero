@@ -56,29 +56,39 @@ function UserService() {
         );
     }
      
-    function register(userObjStr) { 
-        return fetch(self.url, {
+    //TODO how to check for when its alr taken and then what to do
+    function register(username, userObjStr) { 
+        return fetch(self.url + '/' + username, {
+            method: 'get'
+        }).then(function(response) {
+            var user = response.json();
+            if (user.username == username) {
+                alert("rip");
+            } else {
+                return fetch(self.url, {
+                    method: 'post',
+                    body: userObjStr,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    'credentials': 'include'
+                })
+            }
+        })
+      }
+
+      //TODO no work
+    function login(userObjStr, callback) {
+        return fetch('/api/login', {
             method: 'post',
             body: userObjStr,
             headers: {
                 'Content-Type': 'application/json'
             },
             'credentials': 'include'
-        })
-      }
-
-    function login(userObjStr, callback) {
-        var promise = fetch('/api/login', {
-            method: 'get',
-            body: userObjStr,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            'credentials': 'include'
+        }).then(function(response) {
+            console.log(response.json());
         });
-        return promise;
-
-        //TODO is that how to return status or?
     }
 
     function logout(callback) {

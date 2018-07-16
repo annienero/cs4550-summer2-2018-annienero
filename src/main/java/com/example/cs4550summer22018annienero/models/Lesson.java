@@ -14,4 +14,12 @@ public class Lesson {
     @JsonIgnore
     private Module module;
 
+    public void updateLesson(Lesson lesson) {
+        if (lesson.title != null && lesson.title != "") {
+            this.title = lesson.title;
+        }
+        if (lesson.module != null) {
+            this.module = lesson.module;
+        }
+    }
 }

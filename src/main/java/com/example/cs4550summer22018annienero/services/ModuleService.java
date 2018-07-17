@@ -1,16 +1,22 @@
 package com.example.cs4550summer22018annienero.services;
 
+import com.example.cs4550summer22018annienero.models.Course;
 import com.example.cs4550summer22018annienero.models.Module;
+import com.example.cs4550summer22018annienero.repositories.CourseRepository;
 import com.example.cs4550summer22018annienero.repositories.ModuleRepository;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge=3600)
 public class ModuleService {
+
+    @Autowired
+    CourseRepository courseRepository;
 
     @Autowired
     ModuleRepository moduleRepository;
@@ -20,10 +26,17 @@ public class ModuleService {
         return (List<Module>) moduleRepository.findAll();
     }
 
-    @PostMapping("/api/course/{cid}/module") //TODO cid
+    @PostMapping("/api/course/{cid}/module")
     public Module createModule(@PathVariable("cid") String cid, @RequestBody Module module) {
-        return moduleRepository.save(module);
+        Optional<Course> data = courseRepository.findById(Integer.parseInt(cid));
+        if(data.isPresent()) {
+            Course course = data.get();
+            module.setCourse(course);
+            return moduleRepository.save(module);
+        }
+        return null;
     }
+
 
     @DeleteMapping("/api/module/{id}")
     public void deleteModule(@PathVariable("id") String id) {

@@ -4,7 +4,6 @@ import com.example.cs4550summer22018annienero.models.Course;
 import com.example.cs4550summer22018annienero.models.Module;
 import com.example.cs4550summer22018annienero.repositories.CourseRepository;
 import com.example.cs4550summer22018annienero.repositories.ModuleRepository;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +19,6 @@ public class ModuleService {
 
     @Autowired
     ModuleRepository moduleRepository;
-
-    @GetMapping("/api/module")
-    public List<Module> findAllModules() {
-        return (List<Module>) moduleRepository.findAll();
-    }
 
     @PostMapping("/api/course/{cid}/module")
     public Module createModule(@PathVariable("cid") String cid, @RequestBody Module module) {
@@ -56,8 +50,14 @@ public class ModuleService {
         return moduleRepository.save(oldModule);
     }
 
-    @GetMapping("/api/course/{cid}/module") //TODO how to use cid
-    public List<Module> findAllModulesForCourse(@PathVariable("cid") String cid) {
-        return (List<Module>) moduleRepository.findAll();
+    @GetMapping("/api/course/{courseId}/module")
+    public List<Module> findAllModulesForCourse(@PathVariable("courseId") int courseId) {
+        Optional<Course> data = courseRepository.findById(courseId);
+        if(data.isPresent()) {
+            Course course = data.get();
+            return course.getModules();
+        }
+        return null;
     }
+
 }

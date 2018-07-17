@@ -1,6 +1,5 @@
 package com.example.cs4550summer22018annienero.models;
 
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;

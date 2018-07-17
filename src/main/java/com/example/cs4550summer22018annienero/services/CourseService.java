@@ -3,9 +3,7 @@ package com.example.cs4550summer22018annienero.services;
 import com.example.cs4550summer22018annienero.models.Course;
 import com.example.cs4550summer22018annienero.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,5 +16,10 @@ public class CourseService {
     @GetMapping("/api/course")
     public List<Course> findAllLessons() {
         return (List<Course>) courseRepository.findAll();
+    }
+
+    @PostMapping("/api/course")
+    public Course createCourse(@RequestBody Course course) {
+        return courseRepository.save(course);
     }
 }

@@ -18,7 +18,7 @@ public class LessonService {
     }
 
     @DeleteMapping("/api/lesson/{id}")
-    public void createLesson(@PathVariable("id") String id) {
+    public void deleteLesson(@PathVariable("id") String id) {
         lessonRepository.deleteById(Integer.parseInt(id));
     }
 

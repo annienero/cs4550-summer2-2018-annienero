@@ -58,5 +58,15 @@ public class Course {
     public void setModules(List<Module> modules) {
         this.modules = modules;
     }
+
+    public void updateCourse(Course course) {
+        if (course.title != null && course.title != "") {
+            this.title = course.title;
+        }
+        if (course.modules != null) {
+            this.modules = course.modules;
+        }
+        this.modified = new Date();
+    }
 }
 

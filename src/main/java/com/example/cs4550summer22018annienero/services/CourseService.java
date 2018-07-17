@@ -22,4 +22,23 @@ public class CourseService {
     public Course createCourse(@RequestBody Course course) {
         return courseRepository.save(course);
     }
+
+    @DeleteMapping("/api/course/{id}")
+    public void deleteCourse(@PathVariable("id") String id) {
+        Course myCourse = courseRepository.findById(Integer.parseInt(id)).get();
+        courseRepository.delete(myCourse);
+    }
+
+    @GetMapping("/api/course/{id}")
+    public Course findCourseById(@PathVariable("id") String id) {
+        return courseRepository.findById(Integer.parseInt(id)).get();
+    }
+
+    @PutMapping("/api/course/{id}")
+    public Course updateCourse(@PathVariable("id") String id, @RequestBody Course course) {
+        Course oldCourse = courseRepository.findById(Integer.parseInt(id)).get();
+        oldCourse.updateCourse(course);
+        return courseRepository.save(oldCourse);
+    }
+
 }

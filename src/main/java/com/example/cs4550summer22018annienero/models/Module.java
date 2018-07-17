@@ -48,4 +48,16 @@ public class Module {
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
     }
+
+    public void updateModule(Module module) {
+        if (module.title != null && module.title != "") {
+            this.title = module.title;
+        }
+        if (module.course != null) {
+            this.course = module.course;
+        }
+        if (module.lessons != null) {
+            this.lessons = module.lessons;
+        }
+    }
 }

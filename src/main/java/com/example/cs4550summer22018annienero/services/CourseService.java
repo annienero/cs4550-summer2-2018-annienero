@@ -14,7 +14,7 @@ public class CourseService {
     CourseRepository courseRepository;
 
     @GetMapping("/api/course")
-    public List<Course> findAllLessons() {
+    public List<Course> findAllCourses() {
         return (List<Course>) courseRepository.findAll();
     }
 

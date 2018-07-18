@@ -10,7 +10,6 @@ public class Course {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String title;
-    //TODO time bad
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
     @Temporal(TemporalType.TIMESTAMP)

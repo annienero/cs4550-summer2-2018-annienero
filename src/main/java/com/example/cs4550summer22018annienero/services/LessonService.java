@@ -23,7 +23,7 @@ public class LessonService {
 
     @PostMapping("/api/course/{cid}/module/{mid}/lesson")
     public Lesson createLesson(@PathVariable("cid") String cid, @PathVariable("mid") String mid, @RequestBody Lesson lesson) {
-        Optional<Module> data = moduleRepository.findById(Integer.parseInt(cid));
+        Optional<Module> data = moduleRepository.findById(Integer.parseInt(mid));
         if(data.isPresent()) {
             Module module = data.get();
             lesson.setModule(module);

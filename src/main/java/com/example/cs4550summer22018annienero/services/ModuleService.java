@@ -13,12 +13,17 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "*", maxAge=3600)
 public class ModuleService {
-
     @Autowired
     CourseRepository courseRepository;
 
     @Autowired
     ModuleRepository moduleRepository;
+
+    @GetMapping("/api/module/")
+    public List<Module> findAllModules() {
+        return (List<Module>) moduleRepository.findAll();
+    }
+
 
     @PostMapping("/api/course/{cid}/module")
     public Module createModule(@PathVariable("cid") String cid, @RequestBody Module module) {
@@ -30,7 +35,6 @@ public class ModuleService {
         }
         return null;
     }
-
 
     @DeleteMapping("/api/module/{id}")
     public void deleteModule(@PathVariable("id") String id) {

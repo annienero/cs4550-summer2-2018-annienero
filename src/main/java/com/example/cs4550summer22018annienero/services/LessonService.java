@@ -1,11 +1,16 @@
 package com.example.cs4550summer22018annienero.services;
 
 import com.example.cs4550summer22018annienero.models.Lesson;
+import com.example.cs4550summer22018annienero.models.Module;
+import com.example.cs4550summer22018annienero.repositories.CourseRepository;
 import com.example.cs4550summer22018annienero.repositories.LessonRepository;
+import com.example.cs4550summer22018annienero.repositories.ModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge=3600)
@@ -13,14 +18,24 @@ public class LessonService {
     @Autowired
     LessonRepository lessonRepository;
 
-    @PostMapping("/api/course/{cid}/module/{mid}/lesson") //TODO how to use cid and mid
+    @Autowired
+    ModuleRepository moduleRepository;
+
+    @PostMapping("/api/course/{cid}/module/{mid}/lesson")
     public Lesson createLesson(@PathVariable("cid") String cid, @PathVariable("mid") String mid, @RequestBody Lesson lesson) {
-        return lessonRepository.save(lesson);
+        Optional<Module> data = moduleRepository.findById(Integer.parseInt(cid));
+        if(data.isPresent()) {
+            Module module = data.get();
+            lesson.setModule(module);
+            return lessonRepository.save(lesson);
+        }
+        return null;
     }
 
     @DeleteMapping("/api/lesson/{id}")
     public void deleteLesson(@PathVariable("id") String id) {
-        lessonRepository.deleteById(Integer.parseInt(id));
+        Lesson myLesson = lessonRepository.findById(Integer.parseInt(id)).get();
+        lessonRepository.delete(myLesson);
     }
 
     @GetMapping("/api/lesson")
@@ -33,9 +48,14 @@ public class LessonService {
         return lessonRepository.findById(Integer.parseInt(id)).get();
     }
 
-    @GetMapping("/api/course/{cid}/module/{mid}/lesson") //TODO how to use cid and mid
-    public List<Lesson> findAllLessonsForModule(@PathVariable("cid") String cid, @PathVariable("mid") String mid) {
-        return (List<Lesson>) lessonRepository.findAll();
+    @GetMapping("/api/course/{cid}/module/{mid}/lesson")
+    public List<Lesson> findAllLessonsForModule(@PathVariable("cid") int cid, @PathVariable("mid") int mid) {
+        Optional<Module> data = moduleRepository.findById(mid);
+        if(data.isPresent()) {
+            Module module = data.get();
+            return module.getLessons();
+        }
+        return null;
     }
 
     @PutMapping("/api/lesson/{id}")

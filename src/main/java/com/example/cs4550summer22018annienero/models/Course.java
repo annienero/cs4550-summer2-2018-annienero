@@ -10,6 +10,7 @@ public class Course {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String title;
+    private String owner;
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
     @Temporal(TemporalType.TIMESTAMP)
@@ -58,7 +59,18 @@ public class Course {
         this.modules = modules;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
     public void updateCourse(Course course) {
+        if (course.owner != null && course.owner != "") {
+            this.owner = course.owner;
+        }
         if (course.title != null && course.title != "") {
             this.title = course.title;
         }
@@ -67,5 +79,6 @@ public class Course {
         }
         this.modified = new Date();
     }
+
 }
 

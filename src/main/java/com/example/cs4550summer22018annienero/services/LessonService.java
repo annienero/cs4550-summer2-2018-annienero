@@ -2,13 +2,11 @@ package com.example.cs4550summer22018annienero.services;
 
 import com.example.cs4550summer22018annienero.models.Lesson;
 import com.example.cs4550summer22018annienero.models.Module;
-import com.example.cs4550summer22018annienero.repositories.CourseRepository;
 import com.example.cs4550summer22018annienero.repositories.LessonRepository;
 import com.example.cs4550summer22018annienero.repositories.ModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

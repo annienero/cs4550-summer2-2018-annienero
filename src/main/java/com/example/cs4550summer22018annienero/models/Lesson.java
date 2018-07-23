@@ -3,6 +3,7 @@ package com.example.cs4550summer22018annienero.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Lesson {
@@ -10,6 +11,8 @@ public class Lesson {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String title;
+    @OneToMany(mappedBy="lesson")
+    private List<Widget> widgets;
     @ManyToOne
     @JsonIgnore
     private Module module;
@@ -45,5 +48,13 @@ public class Lesson {
 
     public void setModule(Module module) {
         this.module = module;
+    }
+
+    public List<Widget> getWidgets() {
+        return widgets;
+    }
+
+    public void setWidgets(List<Widget> widgets) {
+        this.widgets = widgets;
     }
 }

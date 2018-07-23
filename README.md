@@ -7,3 +7,9 @@ Login validation - If login is unsuccessful, a message is displayed with the rea
 Registration validation - if registration is unsuccessful, a message is displayed with the reason
 Password validation - if passwords don't match when registering, a message is displayed with the reason
 
+
+
+
+Assignment 2:
+
+https://webdev-assignment2.herokuapp.com/course/list

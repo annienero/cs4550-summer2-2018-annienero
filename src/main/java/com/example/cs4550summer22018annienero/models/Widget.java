@@ -8,17 +8,22 @@ import javax.persistence.*;
 public class Widget {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    protected int id;
-    protected String name;
-    protected int widgetOrder;
-    protected String text;
-    protected String className;
-    protected String style;
-    protected String width;
-    protected String height;
+    private int id;
+    private String name;
+    private int widgetOrder;
+    private String text;
+    private String className;
+    private String style;
+    private String width;
+    private String height;
+    private String src;
+    private String href;
+    private ListType listType;
+    private int size;
+
     @ManyToOne
     @JsonIgnore
-    protected Lesson lesson;
+    private Lesson lesson;
 
     public int getId() {
         return id;
@@ -84,6 +89,14 @@ public class Widget {
         this.height = height;
     }
 
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
     public Lesson getLesson() {
         return lesson;
     }
@@ -92,10 +105,33 @@ public class Widget {
         this.lesson = lesson;
     }
 
-    public void updateWidget(Widget widget) {
-        //TODO hm
-        this.widgetOrder = widget.widgetOrder;
+    public String getHref() {
+        return href;
+    }
 
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public ListType getListType() {
+        return listType;
+    }
+
+    public void setListType(ListType listType) {
+        this.listType = listType;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void updateWidget(Widget widget) {
+        this.widgetOrder = widget.widgetOrder;
+        this.size = widget.size;
         if (widget.name != null) {
             this.name = widget.name;
         }
@@ -114,5 +150,15 @@ public class Widget {
         if (widget.width != null) {
             this.width = widget.width;
         }
+        if (widget.src != null) {
+            this.src = widget.src;
+        }
+        if (widget.href != null) {
+            this.href = widget.href;
+        }
+        if (widget.listType != null) {
+            this.listType = widget.listType;
+        }
     }
+
 }

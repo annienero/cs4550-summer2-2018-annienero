@@ -38,19 +38,21 @@ public class WidgetService {
     @PostMapping("/api/lesson/{lessonId}/widget/save")
     public void saveAllWidgets(@PathVariable("lessonId") String lessonId, @RequestBody List<Widget> widgets) {
         Optional<Lesson> data = lessonRepository.findById(Integer.parseInt(lessonId));
-        //if(data.isPresent()) { TODO when care abt individual lesson
-            widgetRepository.deleteAll();
+        if(data.isPresent()) {
             Lesson lesson = data.get();
+            List<Widget> toDelete = lesson.getWidgets();
+            for (Widget widget : toDelete) {
+                widgetRepository.delete(widget);
+            }
             for (Widget widget : widgets) {
                 widget.setLesson(lesson);
                 widgetRepository.save(widget);
             }
-       // }
-
+        }
     }
 
     @GetMapping("/api/widget/{id}")
-    public Widget findLessonById(@PathVariable("id") String id) {
+    public Widget findWidgetById(@PathVariable("id") String id) {
         return widgetRepository.findById(Integer.parseInt(id)).get();
     }
 
